@@ -2,7 +2,7 @@ from visual import *
 from math import sin, cos
 import time 
 
-initialHeight = 20
+initialHeight = 10
 initialVelocity = 20
 Angle = 60
 
