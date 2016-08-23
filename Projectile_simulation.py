@@ -2,9 +2,9 @@ from visual import *
 from math import sin, cos
 import time 
 
-initialHeight = 10
-initialVelocity = 20
-Angle = 60
+initialHeight = input("Enter the initial height: ")
+initialVelocity = input("Enter the initial velocity: ")
+Angle = input("Enter the angle of throw: ")
 
 #initialHeight=input("Enter the initial height: ")
 #initialVelocity=input("Enter the initial velocity: ")
