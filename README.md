@@ -1,1 +1,6 @@
-[Image](./1.png)
+###Projectile Simulation
+
+[](./1.png)
+[](./2.png)
+[](./3.png)
+[](./4.png)
