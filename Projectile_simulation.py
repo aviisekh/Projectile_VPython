@@ -30,23 +30,16 @@ if initialHeight!=0:
 	top1 = sphere(pos=(0,initialHeight+(initialHeight/5)-0.01, 0), radius=rod1.radius)
 	rod2 = cylinder(pos=(0,top1.y+top1.radius-0.5 , 0), axis=(0,initialHeight/9,0), radius=top1.radius/10)
 	top2 = cone(pos=(0,rod2.y+rod2.axis.y,0), axis=(0,rod2.y/6,0), radius=rod2.radius)
-	#table = box(pos=(-2,initialHeight-ball.radius, 0),size=(5,rod1.radius/6,2.3))
-	#hole1 = ring(pos=(-4,initialHeight-ball.radius, 0),  axis=(0,1,0), radius=3, thickness=0.1)
+
 	hole1 = ring(pos=(0,initialHeight-ball.radius, 0),  axis=(0,1,0), radius=rod1.radius+2, thickness=0.1)
 	hole2 = ring(pos=(0,initialHeight+ball.radius+1, 0),  axis=(0,1,0), radius=rod1.radius+2, thickness=0.1)
 	table = box(pos=(0,initialHeight-ball.radius, 2),size=(2.3,rod1.radius/6,hole1.radius+1.2))
 
-	stair1 = cylinder(pos=(0,0 , 0), axis=(0,initialHeight/7,0), radius=rod1.radius+rod1.radius*0.5)
-	stair2 = cylinder(pos=(0,0 , 0), axis=(0,initialHeight/9,0), radius=rod1.radius+rod1.radius*1)
-	stair3 = cylinder(pos=(0,0 , 0), axis=(0,initialHeight/11,0), radius=rod1.radius+rod1.radius*1.5)
-	stair4 = cylinder(pos=(0,0 , 0), axis=(0,initialHeight/13,0), radius=rod1.radius+rod1.radius*2.5)
-	stair5 = cylinder(pos=(0,0 , 0), axis=(0,initialHeight/15,0), radius=rod1.radius+rod1.radius*3)
+	for i in ({"f":7, "r":0.5},{"f":9, "r":1},{"f":11, "r":1.5},{"f":13, "r":2.5},{"f":15, "r":3}):
+		cylinder(pos=(0,0 , 0), axis=(0,initialHeight/i["f"],0), radius=rod1.radius+rod1.radius*i["r"])
 
-	hole3 = ring(pos=(0,initialHeight-initialHeight/4, 0),  axis=(0,1,0), radius=rod1.radius+0.01, thickness=0.1)
-	hole4 = ring(pos=(0,initialHeight-initialHeight/2, 0),  axis=(0,1,0), radius=rod1.radius+0.01, thickness=0.1)
-	hole5 = ring(pos=(0,initialHeight+initialHeight/6.3, 0),  axis=(0,1,0), radius=rod1.radius+0.1, thickness=0.1)
-
-
+	for i in ({"f":4, "r":0.01},{"f":2, "r":0.01},{"f":6.3, "r":0.1}):
+		ring(pos=(0,initialHeight-initialHeight/i["f"], 0),  axis=(0,1,0), radius=rod1.radius+i["r"], thickness=0.1)
 else:
 	ball.y=1
 
@@ -103,23 +96,14 @@ def execute():
 			a=label(pos=(ball.x,ball.y+ball.radius+3,0), text="Max Height Reached:%1.3f m\nDistance:%1.3f m"%(ball.y,ball.x), border=6)
 			key = scene.kb.getkey()
 			a.visible=False
-			#print ball.y
 			count=1
 
-		#if abs(vertical_arrow_length)<=minimal_arrow_length:
-		#	minimal_arrow_length=vertical_arrow_length
-		#	max_vertical_height=ball.y
 		
 		Fgrav=Fgrav+(0,g*dt,0)
 		ballv=ball_velocity+Fgrav
 		ball.pos += ballv*dt
 		
 		if ball.y<1: #when ball hits the ground
-			#t+=dt
-			print "ball.pos = ", ball.pos, "t = ",t
-			#print "ball2.pos = ", ball2.pos
-			#label(pos=(ball.x+horizontal_arrow_length+6,ball.y+1,0), text="Vx= %1.5f"% ballv.x, border=6)
-			#label(pos=(ball.x,ball.y+vertical_arrow_length-2,0), text="Vy= %1.5f"% ballv.y, border=6)
 			label(pos=(ball.x,40,0), text="Range= %1.3f m"% ball.x, border=6)
 			label(pos=(ball.x+1,35,0), text="Time of Flight= %1.3f s"% t, border=6)
 			label(pos=(ball.x+2,30,0), text="Max Height Reached= %1.3f m"% max_vertical_height, border=6)
